@@ -1,0 +1,14 @@
+name: TopKills
+main: antbag\topkills\Main
+version: 0.0.1
+api: 5.0.0
+author: antbag
+
+commands:
+  topkill:
+    description: allow the server admins to setup kill leaderboard
+    permission: topkills.command
+
+permissions:
+  topkills.command:
+    default: op
