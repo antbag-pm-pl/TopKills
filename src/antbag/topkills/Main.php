@@ -17,13 +17,15 @@ use pocketmine\event\player\PlayerDeathEvent;
 
 class Main extends PluginBase implements Listener {
 
-		private $particle = [];
+        private $particle = [];
+	private $data;
 
 	public function onEnable(): void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		@mkdir($this->getDataFolder() . "data");
 		$this->saveResource("setting.yml");
-		$this->config = (new Config($this->getDataFolder()."config.yml", Config::YAML))->getAll();
+		$this->config = new Config($this->getDataFolder()."config.yml", Config::YAML))->getAll();
+		$this->data = new Config($this->getDataFolder()."data/kills.yml", Config::YAML);
 		if(empty($this->config["positions"])){
 			$this->getServer()->getLogger()->Info("Please Set Location");
 			return;
@@ -54,7 +56,7 @@ class Main extends PluginBase implements Listener {
             /** @var EntityDamageByEntityEvent $damageCause */
     
     if (!$damageCause->getDamager() instanceof Player) return;
-    $data = new Config($this->getDataFolder() . "data/kills.yml", Config::YAML);
+    $data = $this->data;
 		$up = $data->get($name);
 		$data->set($name, $up + 1);
 		$data->save();
@@ -78,7 +80,7 @@ class Main extends PluginBase implements Listener {
 		$player = $event->getPlayer();
 		$name = $player->getName();		
 
-		$farm = new Config($this->getDataFolder() . "data/kills.yml", Config::YAML);
+		$farm = $this->data
 		if(!$farm->exists($name)){
 			$farm->set($name, 0);
 			$farm->save();
@@ -86,7 +88,7 @@ class Main extends PluginBase implements Listener {
 	}
 	
 	public function getLeaderBoard(): string{
-    $data = new Config($this->getDataFolder() . "data/kills.yml", Config::YAML);
+    $data = $this->data;
     $setting = new Config($this->getDataFolder() . "setting.yml", Config::YAML);
     $swallet = $data->getAll();
     $message = "";
