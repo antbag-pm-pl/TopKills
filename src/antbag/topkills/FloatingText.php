@@ -1,6 +1,6 @@
 <?php
 
-namespace antbag/topkills;
+namespace antbag\topkills;
 
 use pocketmine\world\particle\FloatingTextParticle;
 
