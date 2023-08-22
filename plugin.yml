@@ -1,6 +1,6 @@
 name: TopKills
 main: antbag\topkills\Main
-version: 0.0.1
+version: 1.1.0
 api: 5.0.0
 author: antbag
 
