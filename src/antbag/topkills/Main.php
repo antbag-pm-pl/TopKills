@@ -41,7 +41,7 @@ class Main extends PluginBase implements Listener {
         if ($command->getName() === "topkill") {
             if (!$sender instanceof Player) return false;
             $config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-            $config->set("positions", [round($p->getPosition()->getX()), round($p->getPosition()->getY()), round($p->getPosition()->getZ())]);
+            $config->set("positions", [round($sender->getPosition()->getX()), round($sender->getPosition()->getY()), round($sender->getPosition()->getZ())]);
             $config->save();
         }
         return true;
